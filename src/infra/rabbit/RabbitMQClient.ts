@@ -35,7 +35,7 @@ export class RabbitMQClient {
         this.channel.ack(msg);
       } catch (error) {
         console.error("Erro ao processar fila", error);
-        this.channel.nack(msg, true, false);
+        this.channel.nack(msg, false, false);
       }
     });
   }
