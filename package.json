@@ -1,0 +1,21 @@
+{
+  "name": "node-pubsub",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "scripts": {
+    "producer": "ts-node-dev src/producer/publish.ts",
+    "consumer": "ts-node-dev src/consumer/consume.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "amqplib": "^0.10.9"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.8",
+    "@types/node": "^25.2.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}

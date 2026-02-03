@@ -1,0 +1,29 @@
+{
+	"servers": {
+		"io.github.ChromeDevTools/chrome-devtools-mcp": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"chrome-devtools-mcp"
+			],
+			"env": {},
+			"type": "stdio"
+		},
+		"awesome-copilot": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"ghcr.io/microsoft/mcp-dotnet-samples/awesome-copilot:latest"
+			],
+			"type": "stdio"
+		},
+		 "Snyk": {
+      "command": "npx",
+      "args": ["-y", "snyk@latest", "mcp", "-t", "stdio"],
+      "env": {}
+    }
+	},
+	"inputs": []
+}
