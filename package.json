@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "main": "index.ts",
   "scripts": {
-    "producer": "ts-node-dev src/producer/publish.ts",
-    "consumer": "ts-node-dev src/consumer/consume.ts",
     "api": "ts-node-dev --respawn src/api/server.ts",
-    "bulk-publish": "ts-node src/scripts/bulk-publish-orders.ts"
+    "order:publish": "ts-node src/scripts/publish-order.ts",
+    "order:consume": "ts-node src/scripts/consume-order.ts",
+    "order:bulk": "ts-node src/scripts/bulk-publish-orders.ts",
+    "hello:send": "node src/tutorials/hello-world/send.js",
+    "hello:receive": "node src/tutorials/hello-world/receive.js"
   },
   "author": "",
   "license": "ISC",
