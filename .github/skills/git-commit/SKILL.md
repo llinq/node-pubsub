@@ -64,7 +64,14 @@ git diff
 git status --porcelain
 ```
 
-### 2. Stage Files (if needed)
+### 2. Stage Files & Group by Context
+
+Review the changes and determine if they belong to a single logical change or multiple distinct changes.
+
+**Logical Grouping Strategy:**
+- **Split by Context**: If changes cover multiple independent contexts (e.g., a refactor, a new feature, and a doc update), create **separate commits** for each.
+- **Order Matters**: Commit prerequisites (e.g., refactors, dependency updates) before the features that use them.
+- **Atomic Commits**: Each commit must be self-contained and leave the codebase in a working state.
 
 If nothing is staged or you want to group changes differently:
 
