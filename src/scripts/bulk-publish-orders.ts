@@ -1,5 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 
+/**
+ * Script to bulk publish orders to the API.
+ * Useful for load testing and generating traffic.
+ * 
+ * Environment Variables:
+ * - API_URL: The URL of the API (default: http://localhost:3000)
+ * - BATCH_SIZE: Number of orders to publish (default: 1000)
+ */
 const API_URL = process.env.API_URL || "http://localhost:3000";
 const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || "1000");
 

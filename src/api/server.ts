@@ -1,21 +1,32 @@
 import express, { Request, Response } from "express";
-import { RabbitMQClient } from "../infra/rabbit/RabbitMQClient";
-import { rabbitConfig } from "../config/rabbit";
+import { OrderPublisher } from "../producer/order-publisher";
+import { OrderEvent } from "../events/order-events";
 
+/**
+ * Express API server entry point.
+ * Provides endpoints for creating orders which are published to RabbitMQ.
+ */
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-const rabbit = new RabbitMQClient();
+const orderPublisher = new OrderPublisher();
 
-app.get("/health", (req: Request, res: Response) => {
+/**
+ * Health check endpoint.
+ */
+app.get("/health", (_: Request, res: Response) => {
   res.json({ status: "ok" });
 });
 
+/**
+ * Endpoint to create a new order.
+ * Publishes an OrderEvent to the queue.
+ */
 app.post("/api/orders", async (req: Request, res: Response) => {
   try {
-    const { orderId, total, items } = req.body;
+    const { orderId, total, userId } = req.body;
 
     if (!orderId || !total) {
       return res.status(400).json({
@@ -23,14 +34,14 @@ app.post("/api/orders", async (req: Request, res: Response) => {
       });
     }
 
-    const event = {
+    const event: OrderEvent = {
       orderId,
       total,
-      items: items || [],
-      createdAt: new Date().toISOString(),
+      userId,
+      timestamp: new Date(),
     };
 
-    await rabbit.publish(rabbitConfig.exchange, rabbitConfig.routingKey, event);
+    await orderPublisher.publish(event);
 
     res.status(201).json({
       message: "Order published to queue successfully",
@@ -44,47 +55,16 @@ app.post("/api/orders", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/api/publish", async (req: Request, res: Response) => {
-  try {
-    const { exchange, routingKey, message } = req.body;
-
-    if (!message) {
-      return res.status(400).json({
-        error: "Message is required",
-      });
-    }
-
-    const targetExchange = exchange || rabbitConfig.exchange;
-    const targetRoutingKey = routingKey || rabbitConfig.routingKey;
-
-    await rabbit.publish(targetExchange, targetRoutingKey, message);
-
-    res.status(201).json({
-      message: "Message published to queue successfully",
-      data: {
-        exchange: targetExchange,
-        routingKey: targetRoutingKey,
-        message,
-      },
-    });
-  } catch (error) {
-    console.error("Error publishing to queue:", error);
-    res.status(500).json({
-      error: "Error publishing message to queue",
-    });
-  }
-});
-
 async function start() {
   try {
-    await rabbit.initialize();
+    // Initialize publishers and clients
+    await orderPublisher.initialize();
     console.log("Connected to RabbitMQ");
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Health check: http://localhost:${PORT}/health`);
       console.log(`Publish order: POST http://localhost:${PORT}/api/orders`);
-      console.log(`Publish message: POST http://localhost:${PORT}/api/publish`);
     });
   } catch (error) {
     console.error("Error starting server:", error);
