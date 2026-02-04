@@ -4,13 +4,8 @@ import crypto from "crypto";
 
 async function publish() {
   const rabbit = new RabbitMQClient();
-  await rabbit.connect();
 
-  await rabbit.setup(
-    rabbitConfig.exchange,
-    rabbitConfig.queue,
-    rabbitConfig.routingKey,
-  );
+  await rabbit.initialize();
 
   const event = {
     orderId: crypto.randomUUID(),

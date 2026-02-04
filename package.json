@@ -4,17 +4,23 @@
   "main": "index.ts",
   "scripts": {
     "producer": "ts-node-dev src/producer/publish.ts",
-    "consumer": "ts-node-dev src/consumer/consume.ts"
+    "consumer": "ts-node-dev src/consumer/consume.ts",
+    "api": "ts-node-dev --respawn src/api/server.ts",
+    "bulk-publish": "ts-node src/scripts/bulk-publish-orders.ts"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "amqplib": "^0.10.9"
+    "amqplib": "^0.10.9",
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.8",
+    "@types/express": "^5.0.6",
     "@types/node": "^25.2.0",
+    "@types/uuid": "^10.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   }
