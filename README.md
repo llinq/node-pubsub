@@ -1,49 +1,100 @@
 # Node Pub/Sub
 
-Projeto de testes para brincar com Node.js e filas RabbitMQ.
+Study project focused on Node.js with TypeScript and event-driven architecture using RabbitMQ.
 
-## O que é?
+## Features
 
-Um playground simples para experimentar com:
-- **Node.js** + TypeScript
-- **RabbitMQ** (sistema de mensageria)
-- Padrão Dead Letter Queue (DLQ)
+- **Class-Based Architecture**: Robust implementation of abstract Publishers and Consumers.
+- **RabbitMQ**: Full integration with exchanges, queues, and dead letter queues.
+- **REST API**: Express server to create orders via HTTP.
+- **Automation Scripts**: Tools for load testing and manual pub/sub.
+- **Tutorials**: [Practical examples](https://www.rabbitmq.com/tutorials)
 
-## Como usar
+## Prerequisites
 
-### 1. Subir o RabbitMQ
+1.  **Node.js**
+2.  **Docker** & **Docker Compose** (to run RabbitMQ)
 
+## Installation
+
+1.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+2.  Start RabbitMQ:
+    ```bash
+    docker-compose up -d
+    ```
+
+## How to Use
+
+### 1. Hello World
+Quick test to verify RabbitMQ connection.
+
+- **Receive messages:**
+  ```bash
+  npm run hello:receive
+  ```
+- **Send messages:**
+  ```bash
+  npm run hello:send
+  ```
+
+### 2. Order System
+Complete simulation of an order creation flow.
+
+#### A. Run the Consumer
+Starts the service listening to the `order.created` queue.
 ```bash
-docker-compose up -d
+npm run order:consume
 ```
 
-### 2. Rodar o consumer
-
+#### B. Publish an Order (Manual)
+Sends a single order event to the queue.
 ```bash
-npm run consumer
+npm run order:publish
 ```
 
-### 3. Enviar uma mensagem
-
-Em outro terminal:
-
+#### C. Load Test (Bulk)
+Publishes multiple orders at once to test processing.
 ```bash
-npm run producer
+# Publishes 1000 orders (default)
+npm run order:bulk
 ```
 
-## O que acontece?
+### 3. REST API
+Starts the Express server to receive orders via HTTP.
 
-- O **producer** envia uma mensagem para a fila `order.created.queue`
-- O **consumer** recebe e processa a mensagem
-- Se houver erro, a mensagem vai direto para a DLQ (Dead Letter Queue)
+1.  Start the API:
+    ```bash
+    npm run api
+    ```
 
-## Acessar o painel do RabbitMQ
+2.  Create an order (curl example):
+    ```bash
+    curl -X POST http://localhost:3000/api/orders \
+         -H "Content-Type: application/json" \
+         -d '{"orderId": "123", "total": 99.90, "userId": "user_01"}'
+    ```
 
-Abra no navegador: http://localhost:15672
+## Monitoring
 
-- **Usuário:** guest
-- **Senha:** guest
+Access the RabbitMQ management dashboard:
+
+- **URL:** [http://localhost:15672](http://localhost:15672)
+- **User:** `guest`
+- **Password:** `guest`
+
+## Project Structure
+
+- **`src/api`**: Express server.
+- **`src/consumer`**: Consumer logic (Base + Implementations).
+- **`src/producer`**: Publisher logic (Base + Implementations).
+- **`src/events`**: Event type definitions and interfaces.
+- **`src/infra`**: RabbitMQ configuration and client.
+- **`src/scripts`**: Utility scripts for manual testing.
+- **`src/tutorials`**: Introductory examples.
 
 ---
-
-_Projeto criado apenas para estudos e testes._
+_Project for study purposes._
