@@ -41,11 +41,9 @@ export class RabbitMQClient {
     await this.channel.bindQueue(queue, exchange, routingKey);
   }
 
-  async publish(exchange: string, routingKey: string, message: object, delay: boolean = true) {
-    const targetExchange = delay ? `${exchange}.delay` : exchange;
-    
+  async publish(exchange: string, routingKey: string, message: object) {
     this.channel.publish(
-      targetExchange,
+      exchange,
       routingKey,
       Buffer.from(JSON.stringify(message)),
       { persistent: true },
