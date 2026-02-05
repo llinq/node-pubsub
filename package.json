@@ -8,7 +8,10 @@
     "order:consume": "ts-node src/scripts/consume-order.ts",
     "order:bulk": "ts-node src/scripts/bulk-publish-orders.ts",
     "hello:send": "node src/tutorials/hello-world/send.js",
-    "hello:receive": "node src/tutorials/hello-world/receive.js"
+    "hello:receive": "node src/tutorials/hello-world/receive.js",
+    "work:new_task": "node src/tutorials/work-queues/new_task.js",
+    "work:worker": "node src/tutorials/work-queues/worker.js",
+    "work:send_tasks": "node src/tutorials/work-queues/send_tasks.js"
   },
   "author": "",
   "license": "ISC",
