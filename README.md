@@ -41,7 +41,35 @@ Quick test to verify RabbitMQ connection.
   npm run hello:send
   ```
 
-### 2. Order System
+### 2. Work Queues
+Distribute time-consuming tasks among multiple workers.
+
+- **Start Worker:**
+  ```bash
+  npm run work:worker
+  ```
+- **Send New Task:**
+  ```bash
+  npm run work:new_task -- "My Task..."
+  ```
+- **Send Multiple Tasks:**
+  ```bash
+  npm run work:send_tasks
+  ```
+
+### 3. Publish/Subscribe
+Broadcast messages to multiple consumers (logging).
+
+- **Receive Logs:**
+  ```bash
+  npm run log:receive
+  ```
+- **Emit Log:**
+  ```bash
+  npm run log:emit -- "Log info..."
+  ```
+
+### 4. Order System
 Complete simulation of an order creation flow.
 
 #### A. Run the Consumer
@@ -63,7 +91,7 @@ Publishes multiple orders at once to test processing.
 npm run order:bulk
 ```
 
-### 3. REST API
+### 5. REST API
 Starts the Express server to receive orders via HTTP.
 
 1.  Start the API:
