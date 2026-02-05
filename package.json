@@ -1,5 +1,5 @@
 {
-  "name": "node-pubsub",
+  "name": "node-rabbitmq",
   "version": "0.0.1",
   "main": "index.ts",
   "scripts": {
