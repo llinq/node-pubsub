@@ -97,7 +97,20 @@ Receive messages based on a pattern (topics).
   npm run log:emit:topic -- "kern.critical" "A critical kernel error"
   ```
 
-### 6. Order System
+### 6. RPC (Remote Procedure Call)
+Request/reply pattern for remote procedure calls.
+
+- **Start Server:**
+  ```bash
+  npm run rpc:server
+  ```
+- **Send Request:**
+  ```bash
+  npm run rpc:client -- <number>
+  ```
+  Example: `npm run rpc:client -- 30`
+
+### 7. Order System
 Complete simulation of an order creation flow.
 
 #### A. Run the Consumer
@@ -119,7 +132,7 @@ Publishes multiple orders at once to test processing.
 npm run order:bulk
 ```
 
-### 7. REST API
+### 8. REST API
 Starts the Express server to receive orders via HTTP.
 
 1.  Start the API:

@@ -17,7 +17,9 @@
     "log:emit:direct": "node src/tutorials/log/emit_log_direct.js",
     "log:receive:direct": "node src/tutorials/log/receive_log_direct.js",
     "log:emit:topic": "node src/tutorials/log/emit_log_topic.js",
-    "log:receive:topic": "node src/tutorials/log/receive_log_topic.js"
+    "log:receive:topic": "node src/tutorials/log/receive_log_topic.js",
+    "rpc:server": "node src/tutorials/rcp/rcp_server.js",
+    "rpc:client": "node src/tutorials/rcp/rcp_client.js"
   },
   "author": "",
   "license": "ISC",
