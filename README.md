@@ -69,7 +69,35 @@ Broadcast messages to multiple consumers (logging).
   npm run log:emit -- "Log info..."
   ```
 
-### 4. Order System
+### 4. Routing
+Subscribe only to a subset of messages (e.g. only critical errors).
+
+- **Receive Logs (info, warning):**
+  ```bash
+  npm run log:receive:direct -- info warning
+  ```
+- **Emit Log (error):**
+  ```bash
+  npm run log:emit:direct -- error "Run. Run. Or it will explode."
+  ```
+
+### 5. Topics
+Receive messages based on a pattern (topics).
+
+- **Receive (all logs):**
+  ```bash
+  npm run log:receive:topic -- "#"
+  ```
+- **Receive (kernel logs):**
+  ```bash
+  npm run log:receive:topic -- "kern.*"
+  ```
+- **Emit Log:**
+  ```bash
+  npm run log:emit:topic -- "kern.critical" "A critical kernel error"
+  ```
+
+### 6. Order System
 Complete simulation of an order creation flow.
 
 #### A. Run the Consumer
@@ -91,7 +119,7 @@ Publishes multiple orders at once to test processing.
 npm run order:bulk
 ```
 
-### 5. REST API
+### 7. REST API
 Starts the Express server to receive orders via HTTP.
 
 1.  Start the API:

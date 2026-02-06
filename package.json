@@ -13,7 +13,11 @@
     "work:worker": "node src/tutorials/work-queues/worker.js",
     "work:send_tasks": "node src/tutorials/work-queues/send_tasks.js",
     "log:emit": "node src/tutorials/log/emit_log.js",
-    "log:receive": "node src/tutorials/log/receive_log.js"
+    "log:receive": "node src/tutorials/log/receive_log.js",
+    "log:emit:direct": "node src/tutorials/log/emit_log_direct.js",
+    "log:receive:direct": "node src/tutorials/log/receive_log_direct.js",
+    "log:emit:topic": "node src/tutorials/log/emit_log_topic.js",
+    "log:receive:topic": "node src/tutorials/log/receive_log_topic.js"
   },
   "author": "",
   "license": "ISC",
